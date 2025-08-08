@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XYZ Laboratories - Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Top navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #007BFF;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .toggle-btn {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+    }
+
+    .navbar h1 {
+      font-size: 20px;
+    }
+
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .icon:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: black;
+      color: white;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .user-id {
+      font-size: 14px;
+      color: white;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 220px;
+      height: calc(100% - 60px);
+      background-color: #ffffff;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      padding-top: 20px;
+      transition: width 0.3s ease;
+      overflow: hidden;
+    }
+
+    .sidebar.collapsed {
+      width: 70px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      white-space: nowrap;
+    }
+
+    .menu-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .menu-item img {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+      transition: margin 0.3s ease;
+    }
+
+    .sidebar.collapsed .menu-item span {
+      display: none;
+    }
+
+    .sidebar.collapsed .menu-item img {
+      margin-right: 0;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 80px 30px 30px;
+      width: calc(100% - 220px);
+      transition: margin-left 0.3s ease, width 0.3s ease;
+    }
+
+    .sidebar.collapsed ~ .content {
+      margin-left: 70px;
+      width: calc(100% - 70px);
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar h1 {
+        font-size: 16px;
+      }
+
+      .user-id {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="images/icon-menu.png" class="toggle-btn" id="toggleSidebar" alt="Toggle Sidebar" />
+      <h1>XYZ</h1>
+    </div>
+    <div class="user-area">
+      <div class="user-id">User ID: lab_user_001</div>
+      <img src="images/icon-bell.png" class="icon" data-tooltip="Notifications" alt="Notifications" />
+      <img src="images/icon-home.png" class="icon" data-tooltip="Home" alt="Home" />
+      <img src="images/icon-logout.png" class="icon" data-tooltip="Logout" alt="Logout" />
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="menu-item">
+      <img src="images/logo-search.png" alt="Search Icon">
+      <span>Search</span>
+    </div>
+    <div class="menu-item">
+      <img src="images/logo-live.png" alt="Live Icon">
+      <span>Live</span>
+    </div>
+    <div class="menu-item"> 
+      <img src="images/logo-completed.png" alt="Completed Icon">
+      <span>Lab</span>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="content">
+    <h2>Welcome to XYZ Laboratories Dashboard</h2>
+    <p>Select an option from the left menu to begin.</p>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+    });
+  </script>
+
+</body>
+</html>
